@@ -13,7 +13,7 @@ Param (
 ######################
 #    WVD Variables   #
 ######################
-$RegistrationToken = ""
+$RegistrationToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IkZDMTBFOUQzNUQ4MEFCMjQyMTM2MTJBMDIwQjA3Q0U2Q0UxODRGMDAiLCJ0eXAiOiJKV1QifQ.eyJSZWdpc3RyYXRpb25JZCI6IjJmNjFlZmJjLTlhYTgtNDY2Yi1hMWY0LTU2MTEwNmEwODY4YSIsIkJyb2tlclVyaSI6Imh0dHBzOi8vcmRicm9rZXItZy11cy1yMC53dmQubWljcm9zb2Z0LmNvbS8iLCJEaWFnbm9zdGljc1VyaSI6Imh0dHBzOi8vcmRkaWFnbm9zdGljcy1nLXVzLXIwLnd2ZC5taWNyb3NvZnQuY29tLyIsIkVuZHBvaW50UG9vbElkIjoiNjE0ZDUwODctYjFhZi00M2M1LWIxYmEtMDUxMmVmZmUwNjA5IiwiR2xvYmFsQnJva2VyVXJpIjoiaHR0cHM6Ly9yZGJyb2tlci53dmQubWljcm9zb2Z0LmNvbS8iLCJHZW9ncmFwaHkiOiJVUyIsIkdsb2JhbEJyb2tlclJlc291cmNlSWRVcmkiOiJodHRwczovL3JkYnJva2VyLnd2ZC5taWNyb3NvZnQuY29tLyIsIkJyb2tlclJlc291cmNlSWRVcmkiOiJodHRwczovL3JkYnJva2VyLWctdXMtcjAud3ZkLm1pY3Jvc29mdC5jb20vIiwiRGlhZ25vc3RpY3NSZXNvdXJjZUlkVXJpIjoiaHR0cHM6Ly9yZGRpYWdub3N0aWNzLWctdXMtcjAud3ZkLm1pY3Jvc29mdC5jb20vIiwibmJmIjoxNjQxOTk2MDExLCJleHAiOjE2NDM0ODEwMDAsImlzcyI6IlJESW5mcmFUb2tlbk1hbmFnZXIiLCJhdWQiOiJSRG1pIn0.UCgJdGV0S5z6yCtm0OuIqElBRukfPKnfTShPwJ5L9Vy7X1x6261SwKrXqc_PMXY7UJUBBoPHzDugCFBrFh99zdgXtZRmXSH-Mo2uo43SXI-FvbhR5BJm-Lq5skX_3K2mvqN9XHNO-q1KEor-pMBbp1PYA79icvYof94DPkxAiOLBcOxMjMn_oQRbAaNGRLzkYmZ0L-jPp2u5N1Hcys5yrbqFC3RGyqtjuBTICK6yebkrWzcbbYbR7nRonsptruJ3Pnt1ocfGrA1oRnEFqcmxm2OOmPSvud2dmRiRMwoZ3-uwo4lslxCtrWzyztbW1wENgcSYt6h62qEILF1YxgyHRQ"
 $LocalWVDpath            = "c:\temp\wvd\"
 $WVDBootURI              = 'https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrxrH'
 $WVDAgentURI             = 'https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrmXv'
