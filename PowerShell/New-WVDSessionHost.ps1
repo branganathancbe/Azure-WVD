@@ -2,18 +2,23 @@
 ##############################
 #    WVD Script Parameters   #
 ##############################
-Param (        
+<#Param (        
     [Parameter(Mandatory=$true)]
         [string]$RegistrationToken<#,
     [Parameter(Mandatory=$false)]
         [string]$Optimize = $true#>           
-)
+#>
 
+#Download and Import Modules
+install-packageProvider -Name NuGet -MinimumVErsion 2.8.5.201 -force
+Install-Module -Name Az.DesktopVirtualization -AllowClobber -Force
+Set-ExecutionPolicy -ExecutionPolicy Bypass -force
+Import-Module -Name Az.DesktopVirtualization
 
 ######################
 #    WVD Variables   #
 ######################
-$RegistrationToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IkZDMTBFOUQzNUQ4MEFCMjQyMTM2MTJBMDIwQjA3Q0U2Q0UxODRGMDAiLCJ0eXAiOiJKV1QifQ.eyJSZWdpc3RyYXRpb25JZCI6IjJmNjFlZmJjLTlhYTgtNDY2Yi1hMWY0LTU2MTEwNmEwODY4YSIsIkJyb2tlclVyaSI6Imh0dHBzOi8vcmRicm9rZXItZy11cy1yMC53dmQubWljcm9zb2Z0LmNvbS8iLCJEaWFnbm9zdGljc1VyaSI6Imh0dHBzOi8vcmRkaWFnbm9zdGljcy1nLXVzLXIwLnd2ZC5taWNyb3NvZnQuY29tLyIsIkVuZHBvaW50UG9vbElkIjoiNjE0ZDUwODctYjFhZi00M2M1LWIxYmEtMDUxMmVmZmUwNjA5IiwiR2xvYmFsQnJva2VyVXJpIjoiaHR0cHM6Ly9yZGJyb2tlci53dmQubWljcm9zb2Z0LmNvbS8iLCJHZW9ncmFwaHkiOiJVUyIsIkdsb2JhbEJyb2tlclJlc291cmNlSWRVcmkiOiJodHRwczovL3JkYnJva2VyLnd2ZC5taWNyb3NvZnQuY29tLyIsIkJyb2tlclJlc291cmNlSWRVcmkiOiJodHRwczovL3JkYnJva2VyLWctdXMtcjAud3ZkLm1pY3Jvc29mdC5jb20vIiwiRGlhZ25vc3RpY3NSZXNvdXJjZUlkVXJpIjoiaHR0cHM6Ly9yZGRpYWdub3N0aWNzLWctdXMtcjAud3ZkLm1pY3Jvc29mdC5jb20vIiwibmJmIjoxNjQxOTk2MDExLCJleHAiOjE2NDM0ODEwMDAsImlzcyI6IlJESW5mcmFUb2tlbk1hbmFnZXIiLCJhdWQiOiJSRG1pIn0.UCgJdGV0S5z6yCtm0OuIqElBRukfPKnfTShPwJ5L9Vy7X1x6261SwKrXqc_PMXY7UJUBBoPHzDugCFBrFh99zdgXtZRmXSH-Mo2uo43SXI-FvbhR5BJm-Lq5skX_3K2mvqN9XHNO-q1KEor-pMBbp1PYA79icvYof94DPkxAiOLBcOxMjMn_oQRbAaNGRLzkYmZ0L-jPp2u5N1Hcys5yrbqFC3RGyqtjuBTICK6yebkrWzcbbYbR7nRonsptruJ3Pnt1ocfGrA1oRnEFqcmxm2OOmPSvud2dmRiRMwoZ3-uwo4lslxCtrWzyztbW1wENgcSYt6h62qEILF1YxgyHRQ"
+$RegistrationToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IkZDMTBFOUQzNUQ4MEFCMjQyMTM2MTJBMDIwQjA3Q0U2Q0UxODRGMDAiLCJ0eXAiOiJKV1QifQ.eyJSZWdpc3RyYXRpb25JZCI6ImVkNTc0YTlhLTI5Y2ItNDYzNi1hMjM1LTdlODRkMjE5ZDdlZSIsIkJyb2tlclVyaSI6Imh0dHBzOi8vcmRicm9rZXItZy11cy1yMC53dmQubWljcm9zb2Z0LmNvbS8iLCJEaWFnbm9zdGljc1VyaSI6Imh0dHBzOi8vcmRkaWFnbm9zdGljcy1nLXVzLXIwLnd2ZC5taWNyb3NvZnQuY29tLyIsIkVuZHBvaW50UG9vbElkIjoiNzkzMDFiNTctZWM2Zi00N2ViLWJiN2MtZmM0MDExYjdhOTdmIiwiR2xvYmFsQnJva2VyVXJpIjoiaHR0cHM6Ly9yZGJyb2tlci53dmQubWljcm9zb2Z0LmNvbS8iLCJHZW9ncmFwaHkiOiJVUyIsIkdsb2JhbEJyb2tlclJlc291cmNlSWRVcmkiOiJodHRwczovL3JkYnJva2VyLnd2ZC5taWNyb3NvZnQuY29tLyIsIkJyb2tlclJlc291cmNlSWRVcmkiOiJodHRwczovL3JkYnJva2VyLWctdXMtcjAud3ZkLm1pY3Jvc29mdC5jb20vIiwiRGlhZ25vc3RpY3NSZXNvdXJjZUlkVXJpIjoiaHR0cHM6Ly9yZGRpYWdub3N0aWNzLWctdXMtcjAud3ZkLm1pY3Jvc29mdC5jb20vIiwibmJmIjoxNjQzMzQyODAyLCJleHAiOjE2NDM5NDc2MDIsImlzcyI6IlJESW5mcmFUb2tlbk1hbmFnZXIiLCJhdWQiOiJSRG1pIn0.CNpmY47JnjyjqmljUN24jejdyZoTgSbKZD68wN4KSiWUl858A5luFOhXUxc_gEKBZLZ00su8XF3G0JtJzW9PwDw-LIy7b_WmvxcNeET4TEsg1qwigE6_hPawhu0aywW2nkQ0twuj4wtOg-txKU4n6Uxd9O_iiteVxrs4DCJsAgDxLhYHXNdKBPVx3knnlb-H1ijhKqPZlXOhs2pm1cdvsOON8p_lz1nzoY-IYwXFjgGsfrhRCoa3YE9kzE4JZQI1lQpNzUMdRvYHAwcU9qFID8_ZVEk6fRd1v4w1ioSNpZfuQkXa1QlILnHj5RaNRhFmUClShlaIrB3wmQe7uk-14Q"
 $LocalWVDpath            = "c:\temp\wvd\"
 $WVDBootURI              = 'https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrxrH'
 $WVDAgentURI             = 'https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrmXv'
@@ -55,9 +60,9 @@ else {
         -BackgroundColor Black `
         "c:\temp\wvd directory already exists"
 }
-New-Item -Path c:\ -Name New-WVDSessionHost.log -ItemType File
+<#New-Item -Path c:\ -Name New-WVDSessionHost.log -ItemType File
 Add-Content `
--LiteralPath C:\New-WVDSessionHost.log `
+-LiteralPath C:\New-WVDSessionHost.log `#>
 "
 RegistrationToken = $RegistrationToken"
 #Optimize          = $Optimize
@@ -72,7 +77,7 @@ Add-Content -LiteralPath C:\New-WVDSessionHost.log "Downloading WVD Boot Loader"
 Add-Content -LiteralPath C:\New-WVDSessionHost.log "Downloading WVD Agent"
     Invoke-WebRequest -Uri $WVDAgentURI -OutFile "$LocalWVDpath$WVDAgentInstaller"
 
-
+<#
 ##############################
 #    OS Specific Settings    #
 ##############################
@@ -121,7 +126,7 @@ Else {
         }        
     }
 }
-
+#>
 
 ################################
 #    Install WVD Componants    #
@@ -141,6 +146,7 @@ $sts = $bootloader_deploy_status.ExitCode
 Add-Content -LiteralPath C:\New-WVDSessionHost.log "Installing WVD Bootloader Complete"
 Write-Output "Installing RDAgentBootLoader on VM Complete. Exit code=$sts`n"
 Wait-Event -Timeout 5
+
 Add-Content -LiteralPath C:\New-WVDSessionHost.log "Installing WVD Agent"
 Write-Output "Installing RD Infra Agent on VM $AgentInstaller`n"
 $agent_deploy_status = Start-Process `
@@ -156,7 +162,7 @@ $agent_deploy_status = Start-Process `
 Add-Content -LiteralPath C:\New-WVDSessionHost.log "WVD Agent Install Complete"
 Wait-Event -Timeout 5
 
-<#
+
 ##########################################
 #    Enable Screen Capture Protection    #
 ##########################################
@@ -188,7 +194,7 @@ New-Item `
     -Force
 Pop-Location
 
-
+<#
 ##############################################
 #    WVD Optimizer (Virtual Desktop Team)    #
 ##############################################
