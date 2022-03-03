@@ -28,15 +28,6 @@
     },
     "SubnetName": {
       "value": "CoreSubnet"
-    },
-    "ProfilePath": {
-      "value": "\\\\msazureacademy.com\\CorpShares\\FSLogix"
-    },
-    "RegistrationToken": {
-      "value": "eyJhCWhQnGM3ohHKZ31JenFGzSZ"
-    },
-    "Optimize": {
-      "value": true
     }
   }
 }
